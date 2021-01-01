@@ -1,5 +1,5 @@
 from quotes import quotes
-from utils import get_auth
+from utils import get_auth, txgvg_dt
 import requests
 from datetime import datetime
 import time
@@ -50,6 +50,31 @@ class Tweeter:
             tweet_id = tweet.get('id_str')
             self.delete_tweet(tweet_id)
 
+def home_alone_season(dt: datetime):
+    # Get date info
+    dt_info = dt.timetuple()
+    dt_month = dt_info.tm_mon
+    dt_year = dt_info.tm_year
+    
+    # Get Thanksgiving date & set XMas variable
+    first_of_nov = datetime(dt_year, 11, 1)
+    first_of_nov_wday = first_of_nov.timetuple().tm_wday
+    txgvg = datetime(dt_year, 11, txgvg_dt[first_of_nov_wday])
+    xmas = datetime(dt_year, 12, 25)
 
-tweeter = Tweeter()
-tweeter.send_tweet()
+    # Check if it's Home Alone season
+    if dt > txgvg and dt <= xmas:
+        return True
+    else:
+        return False
+
+
+if __name__ == "__main__":
+    dt = datetime.now()
+
+    # Check if it's Home Alone Season baby
+    if home_alone_season(dt):
+        tweeter = Tweeter()
+        tweeter.send_tweet()
+    else:
+        print("Oh no! It's not Home Alone season :(")
