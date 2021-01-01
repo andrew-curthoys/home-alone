@@ -13,3 +13,13 @@ def get_auth():
                 resource_owner_secret=access_secret)
 
     return auth
+
+txgvg_dt = {
+    0: 25,
+    1: 24,
+    2: 23,
+    3: 22,
+    4: 28,
+    5: 27,
+    6: 26
+}
